@@ -8,5 +8,5 @@
 .DS_Store
 
 npm-debug.log*
-
 quickstart.md
+size-plugin.json
