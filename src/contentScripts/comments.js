@@ -73,7 +73,9 @@ function fetchAndAppendCommentsSection(el) {
       el.insertAdjacentElement("afterend", tempDiv.firstChild);
 
       const [userId, userName] = getUserInfo();
-      commentForm.querySelector("#comment-username").innerHTML = `${userName} (${userId})`;
+      if (userName) {
+        commentForm.querySelector("#comment-username").innerHTML = `${userName} (${userId})`;
+      }
 
     }
   });

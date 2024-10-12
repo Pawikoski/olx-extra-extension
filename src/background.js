@@ -34,7 +34,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     const formData = new URLSearchParams();
     formData.append('offer_id', offerId);
     formData.append('content', content);
-    formData.append('author_name', author);
+    if (author) {
+      formData.append('author_name', author);
+    } else {
+      formData.append('author_name', "Anonim");
+    }
 
     fetch('http://localhost:8000/api/comments/', {
       method: 'POST',
