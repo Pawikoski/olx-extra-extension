@@ -7,7 +7,12 @@
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "fetchCommentsHTML") {
-    fetch('http://localhost:8000/api/comments')
+    const { offerId } = request.data;
+    fetch(`http://localhost:8000/api/comments/?offer_id=${offerId}`, {
+      headers: {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -22,5 +27,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({ error: error.message });
       });
     return true; // Keep the message channel open for sendResponse
+  }
+  else if (request.action === "newComment") {
+    const { offerId, content, author } = request.data;
+
+    const formData = new URLSearchParams();
+    formData.append('offer_id', offerId);
+    formData.append('content', content);
+    formData.append('author_name', author);
+
+    fetch('http://localhost:8000/api/comments/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+      credentials: "include"
+    })
+      .then(response => {
+        if (response.ok) {
+          sendResponse({ success: true });
+        } else {
+          sendResponse({ success: false });
+        }
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    return true;
   }
 });
