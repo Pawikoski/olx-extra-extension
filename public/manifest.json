@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Olx Plus-extension",
+  "name": "Olx Extra-extension",
   "$schema": "https://json.schemastore.org/chrome-manifest.json",
   "version": "0.1.0",
   "description": "My Chrome Extension",
@@ -14,7 +14,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Olx Plus-extension",
+    "default_title": "Olx Extra-extension",
     "default_popup": "popup.html"
   },
   "permissions": [

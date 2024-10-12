@@ -1,4 +1,4 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Olx Plus Extension
+# <img src="public/icons/icon_48.png" width="45" align="left"> Olx Extra Extension
 
 My Chrome Extension
 
